@@ -6,7 +6,11 @@ public class CharMovement : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    float speed = 2f;
+    public float speed = 3f;
+    public float jumpSpeed = 20f;
+    public bool isGrounded = false;
+
+
     void Start()
     {
         
@@ -17,6 +21,16 @@ public class CharMovement : MonoBehaviour
     {
         var x_auto = Time.deltaTime * speed;
         transform.Translate(x_auto, 0, 0);
+        Jump();
 
+    }
+
+    void Jump()
+    {
+
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded == true)
+        {
+        gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpSpeed), ForceMode2D.Impulse);
+        }
     }
 }
